@@ -29,7 +29,6 @@ init env, (err,env) ->
       
       POLONIEX: request.get('https://poloniex.com/public?command=returnTicker').then ->
         vals = mapValues JSON.parse(it), -> Number it.last
-
         return do
           BTC_ETH: vals.BTC_ETH
       
@@ -39,12 +38,14 @@ init env, (err,env) ->
       markets.KORBIT <<< do
         BTC_ETH: markets.KORBIT.KRW_ETH / markets.KORBIT.KRW_BTC
         EUR_BTC: markets.KORBIT.KRW_BTC / markets.EXCHANGE.KRW_EUR
-        ETH_BTC: markets.KORBIT.KRW_BTC / markets.EXCHANGE.KRW_EUR
 
       each markets, (data, market) ->
         each data, (val, currency) -> 
           env.logger.log "#{market} #{currency} #{val}", {}, { market: market, currency: currency, value: val }
 
+
+      env.logger.log "DIFF_KORBIT_BITSTAMP", {}, { market: 'DIFF_KORBIT_BITSTAMP', currency: 'EUR_BTC', value: (100 - (markets.BITSTAMP.EUR_BTC / markets.KORBIT.EUR_BTC) * 100) }
+      env.logger.log "DIFF_KORBIT_POLONTEX", {}, { market: 'DIFF_KORBIT_POLONTEX', currency: 'BTC_ETH', value: (100 - (markets.POLONIEX.BTC_ETH / markets.KORBIT.BTC_ETH) * 100) }
       
   setInterval tick, 60000
   tick()
