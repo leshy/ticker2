@@ -14,7 +14,7 @@ init env, (err,env) ->
 
   env.logger.outputs.push new logger3.Influx do
     connection: { database: 'ticker2', host: 'localhost' }
-    tagFields: { +module, +app, +metric }
+    tagFields: { +module, +app, +currency, +market }
 
   tick = -> 
     p.props do
@@ -41,14 +41,10 @@ init env, (err,env) ->
         EUR_BTC: markets.KORBIT.KRW_BTC / markets.EXCHANGE.KRW_EUR
         ETH_BTC: markets.KORBIT.KRW_BTC / markets.EXCHANGE.KRW_EUR
 
-
-      ret = {}
       each markets, (data, market) ->
-        each data, (val, currency) -> ret <<< "#{market}_#{currency}": val
+        each data, (val, currency) -> 
+          env.logger.log "#{market} #{currency} #{val}", { market: market, currency: currency, value: val }
 
-      console.log ret
-                  
-#      env.logger.log "exchange #{data.exchangeKRW} KRW for 1 EUR" { exchange: data.exchangeKRW }, metric: 'exchange'
       
   setInterval tick, 60000
   tick()
