@@ -13,7 +13,7 @@ init env, (err,env) ->
   env.logger.addTags pid: process.pid, app: "ticker"
 
   env.logger.outputs.push new logger3.Influx do
-    connection: { database: 'ticker', host: 'localhost' }
+    connection: { database: 'ticker2', host: 'localhost' }
     tagFields: { +module, +app, +metric }
 
   tick = -> 
