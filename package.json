@@ -1,0 +1,23 @@
+{
+  "name": "korbitticker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "lesh <lesh@sysphere.org> (http://lesh.sysphere.org)",
+  "license": "ISC",
+  "dependencies": {
+    "LiveScript": "^1.3.1",
+    "bluebird": "^3.3.4",
+    "immutable": "^3.8.1",
+    "leshdash": "git://github.com/leshy/leshdash.git",
+    "logger3": "git://github.com/leshy/logger3.git",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1",
+    "ribcage": "git://github.com/leshy/ribcage.git",
+    "ribcage_logger": "git://github.com/leshy/ribcage_logger.git"
+  }
+}
