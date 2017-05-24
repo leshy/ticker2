@@ -43,7 +43,7 @@ init env, (err,env) ->
 
       each markets, (data, market) ->
         each data, (val, currency) -> 
-          env.logger.log "#{market} #{currency} #{val}", { market: market, currency: currency, value: val }
+          env.logger.log "#{market} #{currency} #{val}", {}, { market: market, currency: currency, value: val }
 
       
   setInterval tick, 60000
