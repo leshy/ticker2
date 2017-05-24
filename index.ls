@@ -14,7 +14,7 @@ init env, (err,env) ->
 
   env.logger.outputs.push new logger3.Influx do
     connection: { database: 'ticker2', host: 'localhost' }
-    tagFields: { +module, +app, +currency, +market }
+    tagFields: { +module, +app, +currency, +market, +type }
 
   tick = -> 
     p.props do
@@ -41,11 +41,11 @@ init env, (err,env) ->
 
       each markets, (data, market) ->
         each data, (val, currency) -> 
-          env.logger.log "#{market} #{currency} #{val}", {}, { market: market, currency: currency, value: val }
+          env.logger.log "#{market} #{currency} #{val}", {}, { market: market, currency: currency, value: val, type: 'exchange' }
 
 
-      env.logger.log "DIFF_KORBIT_BITSTAMP", {}, { market: 'DIFF_KORBIT_BITSTAMP', currency: 'EUR_BTC', value: (100 - (markets.BITSTAMP.EUR_BTC / markets.KORBIT.EUR_BTC) * 100) }
-      env.logger.log "DIFF_KORBIT_POLONTEX", {}, { market: 'DIFF_KORBIT_POLONTEX', currency: 'BTC_ETH', value: (100 - (markets.POLONIEX.BTC_ETH / markets.KORBIT.BTC_ETH) * 100) }
+      env.logger.log "DIFF_KORBIT_BITSTAMP", {}, { market: 'DIFF_KORBIT_BITSTAMP', currency: 'EUR_BTC', type: 'diff', value: (100 - (markets.BITSTAMP.EUR_BTC / markets.KORBIT.EUR_BTC) * 100) }
+      env.logger.log "DIFF_KORBIT_POLONTEX", {}, { market: 'DIFF_KORBIT_POLONTEX', currency: 'BTC_ETH', type: 'diff', value: (100 - (markets.POLONIEX.BTC_ETH / markets.KORBIT.BTC_ETH) * 100) }
       
   setInterval tick, 60000
   tick()
