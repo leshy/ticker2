@@ -9,6 +9,7 @@ require! {
 
 env = {} 
 
+
 init env, (err,env) ->
   env.logger.addTags pid: process.pid, app: "ticker"
 
@@ -58,6 +59,6 @@ init env, (err,env) ->
       each diffs, (val, currency) ->
         env.logger.log "DIFF_#{currency} #{val}", {}, { market: "DIFF_#{currency}", currency: 'EUR_BTC', type: 'diff', value: val }
             
-  if process.NODE_ENV is "production" then setInterval tick, 60000
+  if process.env.NODE_ENV is "production" then setInterval tick, 60000
   tick()
 
