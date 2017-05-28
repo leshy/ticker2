@@ -12,7 +12,7 @@ env = {}
 init env, (err,env) ->
   env.logger.addTags pid: process.pid, app: "ticker"
 
-  if process.NODE_ENV is "production"
+  if process.env.NODE_ENV is "production"
     console.log "PRODUCTION"
     env.logger.outputs.push new logger3.Influx do
       connection: { database: 'ticker2', host: 'localhost' }
