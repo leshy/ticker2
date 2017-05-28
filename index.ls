@@ -43,7 +43,7 @@ init env, (err,env) ->
     .then (markets) ->
       markets.KORBIT <<< do
         BTC_ETH: markets.KORBIT.KRW_ETH / markets.KORBIT.KRW_BTC
-        BTC_LTC: markets.KORBIT.KRW_LTC / markets.KORBIT.KRW_BTC
+#        BTC_LTC: markets.KORBIT.KRW_LTC / markets.KORBIT.KRW_BTC
         EUR_BTC: markets.KORBIT.KRW_BTC / markets.EXCHANGE.KRW_EUR
 
       each markets, (data, market) ->
